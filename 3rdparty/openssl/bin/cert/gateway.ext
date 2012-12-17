@@ -1,0 +1,7 @@
+extensions = x509v3
+
+[ x509v3 ]
+nsCertType       = server
+nsComment        = "gateway:true"
+keyUsage         = digitalSignature,nonRepudiation,keyEncipherment
+extendedKeyUsage = msSGC,nsSGC,serverAuth

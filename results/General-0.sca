@@ -1,0 +1,23 @@
+version 2
+run General-0-20120706-15:47:27-5888
+attr Netz staticNetwork10
+attr Prot "\"PASER\""
+attr bitRate 512*10^3
+attr configname General
+attr datetime 20120706-15:47:27
+attr experiment General
+attr gw false
+attr inifile omnetpp_static_validation.ini
+attr iterationvars "$seed=1, $Netz=staticNetwork10, $bitRate=512*10^3, $gw=false, $Prot=\"PASER\""
+attr iterationvars2 "$seed=1, $Netz=staticNetwork10, $bitRate=512*10^3, $gw=false, $Prot=\"PASER\", $repetition=0"
+attr measurement "$seed=1, $Netz=staticNetwork10, $bitRate=512*10^3, $gw=false, $Prot=\"PASER\""
+attr network ned.networks.${Netz}
+attr processid 5888
+attr repetition 0
+attr replication #0
+attr resultdir results
+attr runnumber 0
+attr seed 1
+attr seedset 0
+
+scalar . 	seed 	1

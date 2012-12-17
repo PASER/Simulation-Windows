@@ -1,0 +1,31 @@
+Das CA-Zertifikat erstellen:
+openssl genrsa -out cert_ec\private\cakey.pem 2048
+openssl req -config openssl_ec.cnf -new -x509 -days 1460 -key cert_ec\private\cakey.pem -out cert_ec\cacert.pem
+
+#openssl ecparam -out cert_ec\private\cakey.pem -name prime256v1 -genkey
+#openssl req -config openssl_ec.cnf -new -key cert_ec\private\cakey.pem -out cert_ec\antrag\ca.csr
+#openssl x509 -days 1095 -extfile cert_ec\ca.ext -signkey cert_ec\private\cakey.pem -in cert_ec\antrag\ca.csr -req -out cert_ec\newcerts\ca.crt
+
+Ein GW-Zertifikat erstellen
+openssl ecparam -out cert_ec\private\gwkey.pem -name prime256v1 -genkey
+openssl req -config openssl_ec.cnf -new -key cert_ec\private\gwkey.pem -out cert_ec\antrag\gw.csr
+openssl ca -config openssl_ec.cnf -extfile cert_ec\gateway.ext -in cert_ec\antrag\gw.csr -out cert_ec\newcerts\gw.crt
+
+#openssl x509 -days 730 -extfile cert_ec\gateway.ext -CA cert_ec\newcerts\ca.crt -CAkey cert_ec\private\cakey.pem -CAserial cert_ec\serial -in cert_ec\antrag\gw.csr -req -out cert_ec\newcerts\gw.crt
+
+
+Ein Router-Zertifikat erstellen
+openssl ecparam -out cert_ec\private\routerkey.pem -name prime256v1 -genkey
+openssl req -config openssl_ec.cnf -new -key cert_ec\private\routerkey.pem -out cert_ec\antrag\router.csr
+openssl ca -config openssl_ec.cnf -extfile cert_ec\router.ext -in cert_ec\antrag\router.csr -out cert_ec\newcerts\router.crt
+
+Ein KDC-Zertifikat erstellen
+openssl ecparam -out cert_ec\private\kdckey.pem -name prime256v1 -genkey
+openssl req -config openssl_ec.cnf -new -key cert_ec\private\kdckey.pem -out cert_ec\antrag\kdc.csr
+openssl ca -config openssl_ec.cnf -extfile cert_ec\kdc.ext -in cert_ec\antrag\kdc.csr -out cert_ec\newcerts\kdc.crt
+
+# das Zertifikat von 'meier' sperren (durch Neueintrag in index.txt)
+openssl ca -revoke meierCert.pem  # oder 'openssl ca -revoke ./newcerts/03.pem'
+
+# CRL erstellen
+openssl ca -config openssl_ec.cnf -gencrl -out cert_ec\crls\crl.pem

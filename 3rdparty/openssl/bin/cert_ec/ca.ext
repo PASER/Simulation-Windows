@@ -1,0 +1,9 @@
+extensions = x509v3
+
+[ x509v3 ]
+basicConstraints      = CA:true,pathlen:0
+crlDistributionPoints = URI:http://www.mustermann.de/ca/mustermann.crl
+nsCertType            = sslCA,emailCA,objCA
+nsCaPolicyUrl         = "http://www.mustermann.de/ca/policy.htm"
+nsCaRevocationUrl     = "http://www.mustermann.de/ca/heimpold.crl"
+nsComment             = "TEXT CA"
